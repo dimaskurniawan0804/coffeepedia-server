@@ -9,7 +9,7 @@ const typeDefs = gql`
     content: String
     imageUrl: String
     author: String
-    tag: [String]
+    tag: String
     createdAt: Date
   }
 
@@ -128,6 +128,7 @@ const typeDefs = gql`
     username: String
     balance: Int
     accesstoken: String
+    message: String
   }
 
   type PaymentResponse {

@@ -40,10 +40,10 @@ describe('Article - Success Test', () => {
 
 describe('Article - Success Test', () => {
     it('Get article by id - Object of Article', async () => {
-        const res = await request(app).get('/article/6289ec9c4af4cae573253f5b')
+        const res = await request(app).get('/article/628d282c49861f14878c7a2c')
         expect(res.status).toBe(200)
         expect(typeof res.body).toBe('object')
-        expect(res.body).toHaveProperty("_id", '6289ec9c4af4cae573253f5b')
+        expect(res.body).toHaveProperty("_id", '628d282c49861f14878c7a2c')
         expect(res.body).toHaveProperty("title", 'JEDA DI TEKODEKO KOFFIEHUIS SEMARANG')
         expect(res.body).toHaveProperty("content", expect.any(String))
         expect(res.body).toHaveProperty("imageUrl", expect.any(String))
@@ -75,7 +75,7 @@ describe('Article - Fail Test', () => {
 
 describe('Add - Success Test', () => {
     it('Add article and return message added successfully', async () => {
-        const res = await request(app).post('/add').send(articleInput) 
+        const res = await request(app).post('/add').send(articleInput)
         expect(res.status).toBe(201)
         expect(res.body).toHaveProperty('message', expect.any(Object))
         expect(res.body.message[0]).toBe('article added successfully')
@@ -84,7 +84,7 @@ describe('Add - Success Test', () => {
 
 describe('Find all articles - Error Test', () => {
     it('Should return error from find all article feature', (done) => {
-        jest.spyOn(Article, 'findAllArticle').mockRejectedValue({name: 'internal server error'})
+        jest.spyOn(Article, 'findAllArticle').mockRejectedValue({ name: 'internal server error' })
         request(app).get('/articles').then(res => {
             expect(res.status).toBe(500)
             expect(typeof res.body).toBe('object')
@@ -94,23 +94,23 @@ describe('Find all articles - Error Test', () => {
             console.log(error)
             done(error)
         })
-        
+
     })
 })
 
 describe('Add articles - Error Test', () => {
     it('Should return error from find all article feature', (done) => {
-        jest.spyOn(Article, 'addArticle').mockRejectedValue({name: 'internal server error'})
+        jest.spyOn(Article, 'addArticle').mockRejectedValue({ name: 'internal server error' })
         request(app).post('/add').send(articleInput)
-        .then(res => {
-            expect(res.status).toBe(500)
-            expect(typeof res.body).toBe('object')
-            expect(res.body.message).toBe('Internal Server Error')
-            done()
-        }).catch(error => {
-            console.log(error)
-            done(error)
-        })
-        
+            .then(res => {
+                expect(res.status).toBe(500)
+                expect(typeof res.body).toBe('object')
+                expect(res.body.message).toBe('Internal Server Error')
+                done()
+            }).catch(error => {
+                console.log(error)
+                done(error)
+            })
+
     })
 })
